@@ -1,0 +1,3 @@
+ÇELIKTEN, E.; FALHER, G. L.; MATHIOUDAKIS, M. Modeling urban behavior by
+mining geotagged social data. IEEE Transactions on Big Data, v. 3, n. 2, p. 220–233,
+June 2017.
