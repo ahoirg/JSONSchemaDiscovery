@@ -20,7 +20,7 @@
 			<mat-list-item>
 				<button mat-button color="primary" class="app-side-nav-button" [routerLink]="['/alert']">
 					<i class="material-icons">notifications</i>
-					ALERTAS
+					ALERTS
 				</button>
 			</mat-list-item>
 
@@ -54,8 +54,8 @@
 		</button>
 
 		<mat-menu #menu="matMenu">
-			<button mat-menu-item [routerLink]="['/user']">Perfil</button>
-			<button mat-menu-item (click)="logout();sidenav.close()">Sair</button>
+			<button mat-menu-item [routerLink]="['/user']">Profil</button>
+			<button mat-menu-item (click)="logout();sidenav.close()">Exit</button>
 		</mat-menu>
 
 	</mat-toolbar>

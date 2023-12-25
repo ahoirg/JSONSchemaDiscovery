@@ -9,10 +9,10 @@
   		<mat-form-field class="mat-block" >
         <input matInput type="email" placeholder="Email" required [formControl]="emailFormControl" [(ngModel)]="model.email" />
         <mat-error *ngIf="emailFormControl.hasError('pattern')">
-          Por favor, digite um email válido
+          Please, enter a valid email
         </mat-error>
         <mat-error *ngIf="emailFormControl.hasError('required')">
-          Email é <strong>obrigatório</strong>
+          Email address is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
@@ -20,15 +20,15 @@
         <input matInput placeholder="Senha" [type]="showPassword ? 'text' : 'password'" required [(ngModel)]="model.password" #password="ngModel" name="password">
         <mat-icon matSuffix (click)="showPassword = !showPassword">{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-error *ngIf="!password.valid">
-          Senha é <strong>obrigatório</strong>
+          Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
     </mat-card-content>
 
     <mat-card-actions>
-      <button mat-raised-button color="primary" [disabled]="loading">Entrar</button>
-      <a mat-raised-button [routerLink]="['/register']">Criar conta</a>
+      <button mat-raised-button color="primary" [disabled]="loading">Enter</button>
+      <a mat-raised-button [routerLink]="['/register']">Create an account</a>
     </mat-card-actions>
 
   </form>

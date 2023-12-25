@@ -2,54 +2,54 @@
   <mat-horizontal-stepper [linear]="isLinear">
     
     <mat-step>
-      <ng-template matStepLabel>Conexão</ng-template>
+      <ng-template matStepLabel>Connection</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Endereço" [(ngModel)]="model.address" name="address" required>
+        <input matInput placeholder="Address" [(ngModel)]="model.address" name="address" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Porta" [(ngModel)]="model.port" name="port" required>
+        <input matInput placeholder="Port" [(ngModel)]="model.port" name="port" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Nome do banco" [(ngModel)]="model.databaseName" name="databaseName" required>
+        <input matInput placeholder="Database Name" [(ngModel)]="model.databaseName" name="databaseName" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Nome da coleção" [(ngModel)]="model.collectionName" name="collectionName" required>
+        <input matInput placeholder="Collection Name" [(ngModel)]="model.collectionName" name="collectionName" required>
       </mat-form-field>
-      <mat-checkbox [(ngModel)]="model.rawSchemaFormat" name="rawSchemaFormat">Coleção no formato Raw Schema</mat-checkbox>
+      <mat-checkbox [(ngModel)]="model.rawSchemaFormat" name="rawSchemaFormat">Collection in Raw Schema format</mat-checkbox>
       <div>
-        <button mat-button [routerLink]="['/']">Cancelar</button>
-        <button mat-raised-button color="primary" matStepperNext [disabled]="f.form.invalid">Próximo</button>
+        <button mat-button [routerLink]="['/']">Cancel</button>
+        <button mat-raised-button color="primary" matStepperNext [disabled]="f.form.invalid">Next</button>
       </div>
     </mat-step>
     
     <mat-step>
-      <ng-template matStepLabel>Autenticação</ng-template>
+      <ng-template matStepLabel>Authentication</ng-template>
       <mat-form-field>
-        <input matInput placeholder="Nome do banco de dados de administração" [(ngModel)]="model.authentication.authDatabase" name="authDatabase">
+        <input matInput placeholder="AuthDatabase name" [(ngModel)]="model.authentication.authDatabase" name="authDatabase">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Usuário" [(ngModel)]="model.authentication.userName" name="userName">
+        <input matInput placeholder="user Name" [(ngModel)]="model.authentication.userName" name="userName">
       </mat-form-field>
       <mat-form-field>
         <input matInput type="password" placeholder="Senha" [(ngModel)]="model.authentication.password" name="password"> 
       </mat-form-field>
-      <mat-select placeholder="Mecanismo de autenticação" [(ngModel)]="model.authentication.authMechanism" name="authMechanism">
+      <mat-select placeholder="Authentication mechanism" [(ngModel)]="model.authentication.authMechanism" name="authMechanism">
         <mat-option *ngFor="let authMechanism of authMechanisms" [value]="authMechanism">{{authMechanism}}</mat-option>
       </mat-select>
       <div>
-        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperPrevious>Back</button>
         <button mat-raised-button color="primary" matStepperNext [disabled]="f.form.invalid">Próximo</button>
       </div>
     </mat-step>
     
     <mat-step>
-      <ng-template matStepLabel>Pronto</ng-template>
+      <ng-template matStepLabel>Ready</ng-template>
       <p>
-      Esse processo pode demorar de acordo com o tamanho da coleção de documentos informado.
-      Você receberá uma notificação assim que o JSONSchema for extraído. </p>
+        This process may take time depending on the size of the document collection entered.
+        You will receive a notification once the JSONSchema has been extracted. </p>
       <div>
         <button mat-button matStepperPrevious>Voltar</button>
-        <button mat-raised-button color="primary" [disabled]="f.form.invalid" (click)="f.form.valid && discovery()">Extrair JSONSchema</button>
+        <button mat-raised-button color="primary" [disabled]="f.form.invalid" (click)="f.form.valid && discovery()">Extract JSONSchema</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

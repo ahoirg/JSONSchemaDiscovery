@@ -11,10 +11,10 @@ export default class UserController extends BaseController {
     return new Promise((resolv, reject) => {
       this.model.findOne({'email': email})
         .then(user => {
-          if (!user) return reject({'message': 'Não foi possível encontrar sua conta.', 'code': 404});
+          if (!user) return reject({'message': 'Your account was not found.', 'code': 404});
           return user.comparePassword(password)
             .then(isMatch => {
-              if (!isMatch) return reject({'message': 'Senha incorreta. Tente novamente.', 'code': 403});
+              if (!isMatch) return reject({'message': 'Incorrect password. Try again.', 'code': 403});
               return resolv({'token': jwt.sign({'user': user}, process.env.SECRET_TOKEN)});
             });
         });
@@ -26,7 +26,7 @@ export default class UserController extends BaseController {
       this.model.findOne({'_id': userId})
         .then(user => {
           if (user) return resolv(user);
-          return reject({'message': 'Não foi possível encontrar sua conta.', 'code': 404});
+          return reject({'message': 'Your account was not found.', 'code': 404});
         });
     });
   };

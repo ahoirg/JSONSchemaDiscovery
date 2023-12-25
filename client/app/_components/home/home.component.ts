@@ -61,15 +61,15 @@ export class HomeComponent implements OnInit {
   getTypeTooltip(alertType) {
     switch (alertType) {
       case 'DONE':
-        return 'Finalizado com sucesso';
+        return 'Completed successfully';
       case 'DATABASE_CONNECTION_ERROR':
-        return 'Não foi possível conectar ao banco de dados. Verifique o endereço informado e tente novamente.';
+        return 'Unable to connect to database. Check the address entered and try again.';
       case 'EMPTY_COLLECTION_ERROR':
-        return 'Não há documentos na coleção informada. Verifique a mesma e tente novamente.';
+        return 'There are no documents in the reported collection. Check it and try again.';
       case 'LOADING_DOCUMENTS_ERROR':
-        return 'Houve um problema durante a leitura dos documentos. Tente novamente.';
+        return 'There was a problem reading the documents. Try again.';
       default:
-        return 'Não foi possível concluir a extração. Tente novamente.';
+        return 'Unable to complete extraction. Try again.';
     }
   }
 
