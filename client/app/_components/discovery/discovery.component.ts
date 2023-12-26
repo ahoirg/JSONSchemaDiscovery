@@ -22,7 +22,9 @@ export class DiscoveryComponent implements OnInit {
               private jsonSchemaService: JsonSchemaService,
               private feedbackService: FeedbackService) {
       this.model = new DatabaseParam();
-      this.model.port = '27017';
+    this.model.port = '27017'; /* default */
+    this.model.address = 'localhost'; /* default */
+    this.model.databaseName = 'jsonschemadiscovery'; /* default */
       this.authMechanisms = [
         'DEFAULT', 'GSSAPI', 'PLAIN', 'MONGODB-X509', 'SCRAM-SHA-1', 'MONGODB-CR'
       ];
