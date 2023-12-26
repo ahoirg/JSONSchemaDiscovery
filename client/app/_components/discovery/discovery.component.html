@@ -38,7 +38,7 @@
       </mat-select>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button color="primary" matStepperNext [disabled]="f.form.invalid">Próximo</button>
+        <button mat-raised-button color="primary" matStepperNext [disabled]="f.form.invalid">Next</button>
       </div>
     </mat-step>
     
@@ -48,7 +48,7 @@
         This process may take time depending on the size of the document collection entered.
         You will receive a notification once the JSONSchema has been extracted. </p>
       <div>
-        <button mat-button matStepperPrevious>Voltar</button>
+        <button mat-button matStepperPrevious>Back</button>
         <button mat-raised-button color="primary" [disabled]="f.form.invalid" (click)="f.form.valid && discovery()">Extract JSONSchema</button>
       </div>
     </mat-step>
