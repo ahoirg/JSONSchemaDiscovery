@@ -1,18 +1,29 @@
-# Use official Node.js image based on Debian LTS
-FROM node:20.9.0-bullseye
+# Use official Debian LTS version
+FROM debian:bullseye-slim
 
 # Set workspace
 WORKDIR /usr/src/app
+
+# Install Node.js LTS
+RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget git unzip build-essential \
+  && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+  && apt-get install -y nodejs \
+  # Verify that Node.js and npm are installed
+  && node --version \
+  && npm --version
 
 # Add GPG key of MongoDB and add MongoDB repository
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - \
     && echo "deb http://repo.mongodb.org/apt/debian bullseye/mongodb-org/5.0 main" | tee /etc/apt/sources.list.d/mongodb-org-5.0.list \
     && apt-get update \
     && apt-get install -y mongodb-org \
+    # Create the MongoDB data directory
     && mkdir -p /data/db
 
-# Pull JSON files from GitHub repo
-RUN git clone https://github.com/ahoirg/Irregular-Json-Dataset.git /usr/src/json-data
+# Pull JSON files from GitHub repo and unzip the students.zip
+RUN git clone https://github.com/ahoirg/Ordered-and-Unordered-Json-Data.git /usr/src/json-data \
+    && ls -la /usr/src/json-data/ \
+    && unzip /usr/src/json-data/students.zip -d /usr/src/json-data/
 
 # Clone JSONSchemaDiscovery
 RUN git clone https://github.com/ahoirg/JSONSchemaDiscovery /usr/src/app \
@@ -31,6 +42,7 @@ RUN echo '#!/bin/bash' > start.sh \
     && echo 'mongod --fork --config /etc/mongod.conf --logpath /var/log/mongod.log' >> start.sh \
     && echo 'mongo --eval "db.runCommand({ping: 1})"' >> start.sh \
     && echo 'bash import_json.sh' >> start.sh \
+    && echo 'bash smoke.sh' >> start.sh \
     && echo 'while true; do sleep 1000; done' >> start.sh \
     && chmod +x start.sh
 
@@ -41,6 +53,21 @@ RUN echo '#!/bin/bash' > import_json.sh \
     && echo '    mongoimport --db jsonschemadiscovery --collection "$collection_name" --file "$file"' >> import_json.sh \
     && echo 'done' >> import_json.sh \
     && chmod +x import_json.sh
+
+# Create smoke.sh script
+RUN echo '#!/bin/bash' > /usr/src/app/smoke.sh \
+    && echo 'echo "Node.js Version:"' >> /usr/src/app/smoke.sh \
+    && echo 'node --version' >> /usr/src/app/smoke.sh \
+    && echo 'echo "MongoDB Version:"' >> /usr/src/app/smoke.sh \
+    && echo 'mongod --version' >> /usr/src/app/smoke.sh \
+    && echo 'echo "Checking MongoDB collection..."' >> /usr/src/app/smoke.sh \
+    && echo 'if mongo jsonschemadiscovery --eval "db.getCollectionNames().includes(\"students_orj\")" | grep true; then' >> /usr/src/app/smoke.sh \
+    && echo '    echo "DB OKAY! Container is ready for use."' >> /usr/src/app/smoke.sh \
+    && echo 'else' >> /usr/src/app/smoke.sh \
+    && echo '    echo "DB FAIL"' >> /usr/src/app/smoke.sh \
+    && echo 'fi' >> /usr/src/app/smoke.sh \
+    && chmod +x /usr/src/app/smoke.sh
+
 
 # Set start.sh script as launch command
 ENTRYPOINT ["./start.sh"]
