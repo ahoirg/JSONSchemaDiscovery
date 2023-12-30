@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     deleteModal.afterClosed().subscribe((result) => {
       if (result) {
         this.jsonSchemaService.deleteBatch(batchId).subscribe(() => {
-          this.feedbackService.success('Deletado');
+          this.feedbackService.success('Deleted');
           this.jsonSchemaService.listBatches().subscribe((batches) => {
             this.batches = batches;
           });

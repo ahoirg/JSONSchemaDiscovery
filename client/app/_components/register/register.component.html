@@ -24,7 +24,7 @@
       </mat-form-field>
 
       <mat-form-field class="mat-block">
-        <input matInput placeholder="Criar senha" [type]="showPassword ? 'text' : 'password'" required [(ngModel)]="model.password" #password="ngModel" name="password" minlength="6">
+        <input matInput placeholder="Create password" [type]="showPassword ? 'text' : 'password'" required [(ngModel)]="model.password" #password="ngModel" name="password" minlength="6">
         <mat-icon matSuffix (click)="showPassword = !showPassword">{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-error *ngIf="!password.valid">
           Password is <strong>required</strong>

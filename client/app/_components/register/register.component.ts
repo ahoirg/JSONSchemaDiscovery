@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
             this.authenticationService.login(this.model.email, this.model.password)
               .subscribe(
                 data => {
-                  this.feedbackService.success('Bem Vindo', true);
+                  this.feedbackService.success('Welcome', true);
                   this.router.navigate(['/']);
                 }
               );

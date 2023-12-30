@@ -65,7 +65,7 @@ export class AlertComponent implements OnInit {
 
   delete(alertId) {
     this.alertService.deleteAlert(alertId).subscribe(() => {
-      this.feedbackService.success('Deletado');
+      this.feedbackService.success('Deleted');
       this.loadAlerts();
     });
   }

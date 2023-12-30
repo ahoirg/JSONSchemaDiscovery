@@ -41,7 +41,7 @@ export class DiscoveryComponent implements OnInit {
     this.jsonSchemaService.discovery(this.model)
       .subscribe(
         data => {
-          this.feedbackService.success('Processo iniciado', true);
+          this.feedbackService.success('Process started', true);
           this.router.navigate(['/']);
         },
         error => {

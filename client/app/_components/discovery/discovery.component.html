@@ -31,7 +31,7 @@
         <input matInput placeholder="user Name" [(ngModel)]="model.authentication.userName" name="userName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput type="password" placeholder="Senha" [(ngModel)]="model.authentication.password" name="password"> 
+        <input matInput type="password" placeholder="Password" [(ngModel)]="model.authentication.password" name="password"> 
       </mat-form-field>
       <mat-select placeholder="Authentication mechanism" [(ngModel)]="model.authentication.authMechanism" name="authMechanism">
         <mat-option *ngFor="let authMechanism of authMechanisms" [value]="authMechanism">{{authMechanism}}</mat-option>
