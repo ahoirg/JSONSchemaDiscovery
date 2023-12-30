@@ -5,12 +5,15 @@ FROM debian:bullseye-slim
 WORKDIR /usr/src/app
 
 # Install Node.js LTS
-RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget git unzip build-essential \
+RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget git unzip build-essential make \
   && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
-  && apt-get install -y nodejs \
-  # Verify that Node.js and npm are installed
-  && node --version \
-  && npm --version
+  && apt-get install -y nodejs
+
+# Install git-lfs to paper_empirical_evaluation.zip
+RUN apt-get update && apt-get install -y git-lfs
+
+# Install LaTeX to make report
+RUN apt-get update && apt-get install -y --fix-missing texlive texlive-latex-extra texlive-latex-recommended texlive-fonts-extra 
 
 # Add GPG key of MongoDB and add MongoDB repository
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - \
@@ -26,9 +29,25 @@ RUN git clone https://github.com/ahoirg/Ordered-and-Unordered-Json-Data.git /usr
     && unzip /usr/src/json-data/students.zip -d /usr/src/json-data/
 
 # Clone JSONSchemaDiscovery
-RUN git clone https://github.com/ahoirg/JSONSchemaDiscovery /usr/src/app \
+RUN git lfs install \
+    && git clone https://github.com/ahoirg/JSONSchemaExtractionTool.git /usr/src/app \
     && npm install \
     && npm install -f @types/ws@8.5.4
+
+# Create directory for the report
+RUN mkdir -p /usr/src/report
+
+# Unzip the paper into the directory
+RUN unzip /usr/src/app/paper_empirical_evaluation.zip -d /usr/src/report
+
+# Create Makefile
+RUN echo 'report:' > /usr/src/report/Makefile \
+    && echo '\tpdflatex main.tex' >> /usr/src/report/Makefile \
+    && echo '\tbibtex main' >> /usr/src/report/Makefile \
+    && echo '\tpdflatex main.tex' >> /usr/src/report/Makefile \
+    && echo '\tpdflatex main.tex' >> /usr/src/report/Makefile \
+    && echo 'clean:' >> /usr/src/report/Makefile \
+    && echo '\trm -f main.aux main.bbl main.blg main.log main.out main.toc' >> /usr/src/report/Makefile
 
 # Open required ports for application and MongoDB
 EXPOSE 27017 4200
