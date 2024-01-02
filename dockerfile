@@ -16,9 +16,9 @@ RUN apt-get update \
     && apt-get install -y nodejs
 
 # Install texlive to make report
-RUN apt-get update && apt-get install -y --fix-missing texlive 
-RUN apt-get update && apt-get install -y --fix-missing texlive-latex-extra texlive-latex-recommended
-RUN apt-get update && apt-get install -y --fix-missing texlive-fonts-extra
+RUN apt-get update && apt-get install -y texlive 
+RUN apt-get update && apt-get install -y texlive-latex-extra texlive-latex-recommended
+RUN apt-get update && apt-get install -y texlive-fonts-extra
 
 
 # Add GPG key of MongoDB and add MongoDB repository
