@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![CodeQL](https://github.com/ahoirg/JSONSchemaExtractionTool/workflows/CodeQL/badge.svg)
+
 # JSON Schema Extraction Tool
 
 The JSON Schema Extraction Tool efficiently and accurately extracts schemas from JSON and Extended JSON Document Collections, achieving 100% accuracy in rapidly determining the schema of JSON data within MongoDB collections.
@@ -5,8 +8,10 @@ The JSON Schema Extraction Tool efficiently and accurately extracts schemas from
 The JSON Schema Extraction Tool was developed based on the innovative approach introduced in the paper "An Approach for Schema Extraction of JSON and Extended JSON Document Collections".  
 
 The project is continued from the last commit of the JSONSchemaDiscovery project.
+> **Important:**
+> All commits in JSONSchemaExtractionTool (except for those within the JSONSchemaDiscovery) are linked to the relevant issues opened for the development. You can track which commit resolves which issue through the Issues tab. Each commit is connected to the corresponding issues either through the commit message or comments made on the commit. **There are no commits that are not linked to an issue. This ensures that all commits in the project are easily traceable and understandable.**
 
-You can use this project locally on your machine or test it with the provided sample data using our Dockerfile for a Docker container setup. Below, you will find instructions for both local and container usage.
+You can use this project locally on your device or test it with the provided sample data using the Dockerfile for a Docker container setup. Below, you will find instructions for both local and container usage.
 
 ---
 
@@ -22,7 +27,7 @@ You can use this project locally on your machine or test it with the provided sa
 
 To utilize the JSON Schema Extraction Tool in a Docker container, follow these simple steps:
 
-1. **Clone the Project**: Begin by cloning the repository using `git clone`, or simply download the Dockerfile directly to your machine.
+1. **Clone the Project**: Begin by cloning the repository using `git clone`, or simply download the Dockerfile directly to your device.
 
 2. **Initialize Docker**: Ensure that Docker is running on your system. If not, start Docker from your system's applications.
 
@@ -48,10 +53,10 @@ To utilize the JSON Schema Extraction Tool in a Docker container, follow these s
      ```
      
      - `-m` sets the memory limit (e.g., 5GB).
-     - `--cpus` specifies the number of CPUs to use.
-   - For lighter usage or if not conducting experiments as described in the "RepEng Project: Empirical Evaluation of JSON Schema Extraction from MongoDB Collections" paper, you can simply use `docker run -p 27017:27017 -p 4200:4200 json-schema-extraction-tool .`
-   - MongoDB runs on port 27017 inside the container. The `-p 27017:27017` maps this port for external access. Change the first `27017` if this port is already in use on your machine.
-   - The JSONSchemaExtractionTool application runs on port 4200 inside the container. The `-p 4200:4200` maps this port for external access. Change the first `4200` if this port is already in use on your machine.
+     - `--cpus` sets the number of CPUs to use.
+   - For faster usage or if not conducting experiments as described in the "RepEng Project: Empirical Evaluation of JSON Schema Extraction from MongoDB Collections" paper, you can simply use `docker run -p 27017:27017 -p 4200:4200 json-schema-extraction-tool .`
+   - MongoDB runs on port 27017 inside the container. The `-p 27017:27017` maps this port for external access. Change the first `27017` if this port is already in use on your device.
+   - The JSONSchemaExtractionTool application runs on port 4200 inside the container. The `-p 4200:4200` maps this port for external access. Change the first `4200` if this port is already in use on your device.
 6. **Expected Output**:
    - Upon successful execution, your terminal should display the following results:
 
@@ -98,29 +103,35 @@ To utilize the JSON Schema Extraction Tool in a Docker container, follow these s
       ```
       - Note: After the step 7, the Docker terminal will open directly at /usr/src/app. If you have changed the directory, make sure to navigate back to /usr/src/app before running the command.
    - This will start the JSON Schema Extraction Tool within the container.
-   - Open a web browser on your local machine and navigate to `http://localhost:4200/`
+   - Open a web browser on your local device and navigate to `http://localhost:4200/`
    - This should load the user interface of the JSON Schema Extraction Tool, allowing you to interact with it.
 9. **Optional: Checking the Database**:
-   This step is optional. If you wish to inspect the database within the Docker container, you can do so using either MongoDB Compass on your local machine or the mongo shell inside the container.
-   - If MongoDB Compass is installed on your local machine, you can connect to the database at `mongodb://localhost:27017`
-   - To use the mongo shell within the Docker container, enter the command mongo in the container's shell ("root@54b5e0d86a73:/usr/src/app# mongo")
-      mongo shell commands: , "show dbs", "use jsonschemadiscovery", "show collections"
+   This step is optional. If you wish to inspect the database within the Docker container, you can do so using either MongoDB Compass on your local device or the mongo shell inside the container.
+   - If MongoDB Compass is installed on your local device, you can connect to the database with `mongodb://localhost:27017`
+   - To use the mongo shell within the Docker container, enter the mongo shell with the command : ` mongo `
+      - mongo shell commands: , "show dbs", "use jsonschemadiscovery", "show collections"
 
-   You can learn how to use the project by continuing in the **2)Using The Project** section.
+   You can learn how to use the project by continuing in the [2. Using the Project](#2-using-the-project) section.
 
 ---
 
 ## 1.2) Local Usage Instructions
+
+**Note**: If you are trying the project in a Docker container, you should skip this instruction. Proceed directly to [2. Using the Project](#2-using-the-project) section.
+
 1. **What you need installed to run this project**
    * [NodeJS](http://nodejs.org)
    * [Mongo DB](https://www.mongodb.org)
 
-2) **Install all dependencies**: After clone the repo to your local machine, in project's folder:
+2) **Install all dependencies**: After clone the repo to your local device, in project's folder:
 - Install global dependencies:
     * [Angular CLI](https://cli.angular.io/) `npm install -g @angular/cli`
     * [Typescript](https://www.typescriptlang.org/) `npm install -g typescript`
 
 - Install project dependencies running:
+     ```
+     npm install -f @types/ws@8.5.4
+     ```
      ```
      npm install
      ```
@@ -129,14 +140,14 @@ To utilize the JSON Schema Extraction Tool in a Docker container, follow these s
       npm run dev
       ```
       - Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-      - 
+        
 4) **Optional: Checking the Database**:
-   This step is optional. If you wish to inspect the database, you can use MongoDB Compass on your local machine or you can use the mongo shell.
-   - If MongoDB Compass is installed on your local machine, you can connect to the database at `mongodb://localhost:27017`
+   This step is optional. If you wish to inspect the database, you can use MongoDB Compass on your local device or you can use the mongo shell.
+   - If MongoDB Compass is installed on your local device, you can connect to the database at `mongodb://localhost:27017`
    - To use the mongo shell, enter the mongo shell with the command : ` mongo `
-      mongo shell commands: , "show dbs", "use jsonschemadiscovery", "show collections"
+      - mongo shell commands: , "show dbs", "use jsonschemadiscovery", "show collections"
 
-You can learn how to use the project by continuing in the **2)Using The Project** section.
+You can learn how to use the project by continuing in the [2. Using the Project](#2-using-the-project) section.
 
 ---
 
@@ -150,35 +161,35 @@ When you open `http://localhost:4200/` in your browser, you will be greeted with
 
 ### First Trial
 - To try your first JSON extraction, click on the plus (+) button inside the red circle located at the bottom right corner of the screen.
-- This process will lead you through a series of three screens:
+- The screen consisting of 3 tabs will open:
   1. Connection
   2. Authentication
   3. Ready
      
 ### Connection
 - In the Connection section, you will enter the database information.
-- If you are running the project inside Docker, you do not need to change any values except for the Collection name. The necessary information is set to default in the code.
+- If you are running the project inside Docker, you do not need to change any values except for the Collection name. The necessary informations are set to default in the code.
 - For the Collection name field, you can try any of the following databases in the container: `students_dif_value`, `students_orj`, `students_shuffled`, `students_shuffled_dif_items`.
 - It is recommended to use the `students_shuffled` database.
 
 ### Authentication
-- **If you are running the project within a Docker container,** there is no need to change anything in this section.
+- **If you are running the project in Docker Container**, you can skip the authentication screen directly. 
 - Otherwise, you will need to enter the required information to connect to your database.
 
 ### Ready
-- The final screen is "Ready". You can initiate the process by clicking the "Extract JsonSchema" button.
-- The duration of the process varies depending on the size and state of the collection. When the process is complete, an alert will appear on the screen.
-- You can wait for the process to complete by switching to the WORKSPACE screen from the left menu.
+- You can initiate the process by clicking the "Extract JsonSchema" button.
+- The duration of the process varies depending on the size of the collection. When the process is complete, an alert will appear on the screen.
+- Please **do not** press the button multiple times.
 
  **Important Note**
-- Due to specifics in the core code, there are instances where the alert may not appear even after the process has finished. In such cases, it's recommended to manually refresh the page every 2 minutes to check the status.
+- Due to the structure of the core code, there may be situations where the alert does not show up, even after the process has completed. In such cases, if the process is not completed within 6-7 minutes after pressing the button, you can manually switch to the workspace tab.
 
 ### Checking Results and Downloading the JSON Schema
 
 - In the Workspace screen, if you see a blue checkmark, it indicates that the process is complete.
-- You can view the details of the completed process by clicking on the eye icon next to the relevant task.
-- Additionally, you have the option to download the JSON schema.
-- The detail window also provides a button that show insights into the time consumed at each stage of the JSON extraction process.
+- You can view the details of the completed process by clicking on the eye icon next to the relevant task. The details window will open.
+- You have the option to download the JSON schema in the details window.
+- The details window also provides a button that show insights into the time consumed at each stage of the JSON extraction process.
 
 ---
 
@@ -201,14 +212,15 @@ After the report is created, a temporary file will be generated. To delete these
 ```
 make clean
 ```
--The make report command will create a new report each time it's run. You can make changes to the LaTeX code to generate new reports as needed.
-Note: You can open a terminal on your machine and use the following command to copy the report to your machine:
+-The `make report` command will create a new report each time it's run. You can make changes to the LaTeX code to generate new reports as needed.
+
+Note: You can open a terminal on your device and use the following command to copy the report to your device:
 ```
 docker cp {container_id}:/usr/src/report/main.pdf .
 ```
 
 ### 3.2) Create the Report Without Using Docker Container
 
-You can upload the LaTeX code to websites like [overleaf](https://www.overleaf.com/), or you can install applications like [MiKTeX](https://miktex.org)  on your machine to create the report.
+You can upload the LaTeX code to websites like [overleaf](https://www.overleaf.com/), or you can install applications like [MiKTeX](https://miktex.org)  on your device to create the report.
 
 
