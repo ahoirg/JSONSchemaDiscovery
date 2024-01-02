@@ -4,16 +4,22 @@ FROM debian:bullseye-slim
 # Set workspace
 WORKDIR /usr/src/app
 
-# Install Node.js LTS and required software
-RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget git unzip build-essential make \
-  && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
-  && apt-get install -y nodejs
+# To ensure stability, some commands were run with more than one RUN command # 
 
-# Install git-lfs to paper_empirical_evaluation.zip
-RUN apt-get update && apt-get install -y git-lfs
+# Install required software
+RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget 
+RUN apt-get update && apt-get install -y git git-lfs unzip build-essential make 
+
+# Install Node.js LTS
+RUN apt-get update \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs
 
 # Install texlive to make report
-RUN apt-get update && apt-get install -y --fix-missing texlive texlive-latex-extra texlive-latex-recommended texlive-fonts-extra 
+RUN apt-get update && apt-get install -y --fix-missing texlive 
+RUN apt-get update && apt-get install -y --fix-missing texlive-latex-extra texlive-latex-recommended
+RUN apt-get update && apt-get install -y --fix-missing texlive-fonts-extra
+
 
 # Add GPG key of MongoDB and add MongoDB repository
 RUN wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add - \
