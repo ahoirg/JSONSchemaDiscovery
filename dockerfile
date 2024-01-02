@@ -4,7 +4,7 @@ FROM debian:bullseye-slim
 # Set workspace
 WORKDIR /usr/src/app
 
-# Install Node.js LTS
+# Install Node.js LTS and required software
 RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget git unzip build-essential make \
   && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
   && apt-get install -y nodejs
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y curl gnupg2 lsb-release wget git unzip 
 # Install git-lfs to paper_empirical_evaluation.zip
 RUN apt-get update && apt-get install -y git-lfs
 
-# Install LaTeX to make report
+# Install texlive to make report
 RUN apt-get update && apt-get install -y --fix-missing texlive texlive-latex-extra texlive-latex-recommended texlive-fonts-extra 
 
 # Add GPG key of MongoDB and add MongoDB repository
@@ -28,7 +28,7 @@ RUN git clone https://github.com/ahoirg/Ordered-and-Unordered-Json-Data.git /usr
     && ls -la /usr/src/json-data/ \
     && unzip /usr/src/json-data/students.zip -d /usr/src/json-data/
 
-# Clone JSONSchemaDiscovery
+# Clone JSONSchemaDiscovery and install dependencies
 RUN git lfs install \
     && git clone https://github.com/ahoirg/JSONSchemaExtractionTool.git /usr/src/app \
     && npm install \
@@ -37,7 +37,7 @@ RUN git lfs install \
 # Create directory for the report
 RUN mkdir -p /usr/src/report
 
-# Unzip the paper into the directory
+# Unzip the report into the directory
 RUN unzip /usr/src/app/paper_empirical_evaluation.zip -d /usr/src/report
 
 # Create Makefile
